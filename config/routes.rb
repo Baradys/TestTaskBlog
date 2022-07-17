@@ -19,6 +19,5 @@ Rails.application.routes.draw {
 
   delete 'comments/:id', to: 'comments#delete'
 
-
   root 'users#users'
 }
