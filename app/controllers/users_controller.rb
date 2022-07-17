@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   end
 
   def user_id
-    render json: @user
+    x = @user.as_json(:include => { :posts => {
+      :include => { :comments => {
+        :only => [:mark, :text]} },
+      :only => [:title, :text] } })
+    render json: x
   end
 
   def create
