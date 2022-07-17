@@ -9,6 +9,15 @@ Rails.application.routes.draw do
 
   delete 'users/:id', to: 'users#delete'
 
+  post '/posts', to: 'posts#create'
+
+  put '/posts/:id', to: 'posts#update'
+
+  delete 'posts/:id', to: 'posts#delete'
+
+  post '/comments', to: 'comments#create'
+
+  delete 'comments/:id', to: 'comments#delete'
 
 
   root 'users#users'
