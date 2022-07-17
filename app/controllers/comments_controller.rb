@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
-
+  before_action :set_comment, only: %i[create delete]
   def create
-    @comments = Comment.new comment_params
   end
 
   def delete
@@ -10,5 +9,9 @@ class CommentsController < ApplicationController
   private
   def comment_params
     params.require(:comment).permit(:mark, :text)
+  end
+
+  def set_comment
+    @comment = Comment.find_by id: params[:id]
   end
 end

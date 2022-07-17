@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[user_id update]
 
   def users
     @users = User.all
@@ -6,7 +7,6 @@ class UsersController < ApplicationController
   end
 
   def user_id
-    @user = User.find_by id: params[:id]
     render json: @user
   end
 
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by id: params[:id]
   end
 
   def delete
@@ -26,6 +25,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name)
   end
 
+  def set_user
+    @user = User.find_by id: params[:id]
+  end
 end
 
 
