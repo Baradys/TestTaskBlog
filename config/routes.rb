@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw {
   get '/users', to: 'users#users'
 
   get '/users/:id', to: 'users#user_id'
@@ -21,4 +21,4 @@ Rails.application.routes.draw do
 
 
   root 'users#users'
-end
+}
