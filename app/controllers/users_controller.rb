@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show create update destroy]
 
   def index
-    @users = User.all
+    from = params[:start_date].present? ? params[:start_date] : Date.new(1970, 01, 01)
+    to = params[:end_date].present? ? params[:end_date] : Date.tomorrow
+    @users = User.where(date: from..to)
     render json: @users
   end
 
