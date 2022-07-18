@@ -3,15 +3,24 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[destroy]
 
   def create
-    Comment.create(
-      comment_params
-    )
-    render json: params
+    @comment = Comment.new user_params
+    if @comment.save
+      render json: params
+    else
+      render json: {
+        error: "Comment not saved"
+      }
+    end
   end
 
   def destroy
-    @comment.destroy
-    render json: Comment.all
+    if @comment.destroy
+      render json: Comment.all
+    else
+      render json: {
+        error: "Comment not deleted"
+      }
+    end
   end
 
   private

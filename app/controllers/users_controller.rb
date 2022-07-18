@@ -15,20 +15,35 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new user_params
-    @user.save
-    render json: params
+    if @user.save
+      render json: params
+    else
+      render json: {
+        error: "User not saved"
+      }
+    end
   end
 
   def update
-    @user.update(
+    if @user.update(
       user_params
     )
-    render json: params
+      render json: params
+    else
+      render json: {
+        error: "User not updated"
+      }
+    end
   end
 
   def destroy
-    @user.destroy
-    render json: User.all
+    if @user.destroy
+      render json: User.all
+    else
+      render json: {
+        error: "User not deleted"
+      }
+    end
   end
 
   private

@@ -3,22 +3,36 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[update destroy]
 
   def create
-    Post.create(
-      post_params
-    )
-    render json: params
+    @post = User.new user_params
+    if @post.save
+      render json: params
+    else
+      render json: {
+        error: "Post not saved"
+      }
+    end
   end
 
   def update
-    @post.update(
-      post_params
+    if @post.update(
+      user_params
     )
-    render json: params
+      render json: params
+    else
+      render json: {
+        error: "Post not updated"
+      }
+    end
   end
 
   def destroy
-    @post.destroy
-    render json: Post.all
+    if @post.destroy
+      render json: Post.all
+    else
+      render json: {
+        error: "Post not deleted"
+      }
+    end
   end
 
   private
