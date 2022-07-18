@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     from = params[:start_date].present? ? params[:start_date] : Date.new(1970, 01, 01)
     to = params[:end_date].present? ? params[:end_date] : Date.tomorrow
-    @users = User.where(date: from..to)
+    @users = User.where(date: from..to).includes(:posts, :comments)
     render json: @users
   end
 
