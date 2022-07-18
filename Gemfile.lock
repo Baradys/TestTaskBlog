@@ -205,7 +205,6 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   cssbundling-rails
   debug
-  image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
   mini_magick
