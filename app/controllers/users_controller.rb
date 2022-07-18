@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[user_id update]
+  skip_before_action :verify_authenticity_token
+  before_action :set_user, only: %i[user_id update destroy]
 
   def users
     @users_after = User.created_after("2000-20-02")
@@ -8,30 +9,28 @@ class UsersController < ApplicationController
   end
 
   def user_id
-    x = @user.as_json(:include => { :posts => {
+    @user = @user.as_json(:include => { :posts => {
       :include => { :comments => {
         :only => [:mark, :text]} },
       :only => [:title, :text, :picture] } })
-    render json: x
+    render json: @user
   end
 
   def create
-    @user = User.new user_params
+    User.create(
+      name: params[:name],
+    id: params[:id]
+    )
   end
 
   def update
     @user.update(
-      name: params[:user][:name]
+      name: params[:name]
     )
   end
 
   def destroy
     @user.destroy
-  end
-
-  private
-  def user_params
-    params.require(:user).permit(:name)
   end
 
   def set_user

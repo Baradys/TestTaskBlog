@@ -1,15 +1,22 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[update delete]
+  skip_before_action :verify_authenticity_token
+  before_action :set_post, only: %i[update destroy]
 
   def create
-    @post = Post.new post_params
+    Post.create(
+      title: params[:title],
+      text: params[:text],
+      picture:params[:picture],
+      user_id:params[:user_id]
+    )
   end
 
   def update
     @post.update(
-      title: params[:post][:title],
-      text: params[:post][:text],
-      picture: params[:post][:picture]
+      title: params[:title],
+      text: params[:text],
+      picture:params[:picture],
+      user_id:params[:user_id]
     )
   end
 
@@ -17,10 +24,6 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
-  private
-  def post_params
-    params.require(:post).permit(:title, :text)
-  end
 
   def set_post
     @post = Post.find_by id: params[:id]
