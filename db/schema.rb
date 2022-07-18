@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_17_204400) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_091721) do
   create_table "comments", force: :cascade do |t|
     t.integer "mark"
     t.text "text"
@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_17_204400) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "text"
-    t.binary "picture"
     t.integer "user_id", null: false
+    t.string "picture"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

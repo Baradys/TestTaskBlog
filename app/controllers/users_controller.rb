@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[user_id update]
 
   def users
-    @users = User.all
+    @users = User.created_after("2000-20-02")
     render json: @users
   end
 
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     x = @user.as_json(:include => { :posts => {
       :include => { :comments => {
         :only => [:mark, :text]} },
-      :only => [:title, :text] } })
+      :only => [:title, :text, :picture] } })
     render json: x
   end
 
