@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.permit(:mark, :text, :post_id, :user_id)
   end

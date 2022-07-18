@@ -3,6 +3,6 @@ class Post < ApplicationRecord
   # serialize :picture, JSON # If you use SQLite, add this line.
   belongs_to :user
   has_many :comments, dependent: :destroy
-  validates :title, presence: true, length: {minimum: 2}
-  validates :text, presence: true, length: {minimum: 3}
+  validates :title, presence: true, length: { minimum: 2 }
+  validates :text, presence: true, length: { minimum: 3 }
 end

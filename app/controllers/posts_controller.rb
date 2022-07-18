@@ -22,10 +22,10 @@ class PostsController < ApplicationController
   end
 
   private
+
   def post_params
     params.permit(:title, :text, :picture, :user_id)
   end
-
 
   def set_post
     @post = Post.find_by id: params[:id]
