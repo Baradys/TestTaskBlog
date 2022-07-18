@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
-  has_many :comments , dependent: :destroy
+  has_many :comments
   after_initialize do |blog_post|
     blog_post.date = Time.now.strftime('%Y-%m-%d')
   end
