@@ -4,17 +4,20 @@ class CommentsController < ApplicationController
 
   def create
     Comment.create(
-      mark: params[:mark],
-      text: params[:text],
-      post_id:params[:post_id],
-      user_id:params[:user_id]
+      comment_params
     )
+    render json: params
   end
 
   def destroy
     @comment.destroy
+    render json: Comment.all
   end
 
+  private
+  def comment_params
+    params.permit(:mark, :text, :post_id, :user_id)
+  end
 
   def set_comment
     @comment = Comment.find_by id: params[:id]
