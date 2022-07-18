@@ -4,24 +4,26 @@ class PostsController < ApplicationController
 
   def create
     Post.create(
-      title: params[:title],
-      text: params[:text],
-      picture: params[:picture],
-      user_id: params[:user_id]
+      post_params
     )
+    render json: params
   end
 
   def update
     @post.update(
-      title: params[:title],
-      text: params[:text],
-      picture:params[:picture],
-      user_id:params[:user_id]
+      post_params
     )
+    render json: params
   end
 
   def destroy
     @post.destroy
+    render json: Post.all
+  end
+
+  private
+  def post_params
+    params.permit(:title, :text, :picture, :user_id)
   end
 
 
