@@ -2,8 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[user_id update]
 
   def users
-    @users = User.created_after("2000-20-02")
-    render json: @users
+    @users_after = User.created_after("2000-20-02")
+    @users_before = User.created_before("2000-20-02")
+    render json: @users_after + @users_before
   end
 
   def user_id
@@ -19,9 +20,13 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.update(
+      name: params[:user][:name]
+    )
   end
 
-  def delete
+  def destroy
+    @user.destroy
   end
 
   private

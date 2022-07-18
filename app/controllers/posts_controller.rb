@@ -6,9 +6,15 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post.update(
+      title: params[:post][:title],
+      text: params[:post][:text],
+      picture: params[:post][:picture]
+    )
   end
 
-  def delete
+  def destroy
+    @post.destroy
   end
 
   private

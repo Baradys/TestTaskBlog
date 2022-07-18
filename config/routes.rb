@@ -7,17 +7,17 @@ Rails.application.routes.draw {
 
   put '/users/:id', to: 'users#update'
 
-  delete 'users/:id', to: 'users#delete'
+  delete 'users/:id', to: 'users#destroy'
 
   post '/posts', to: 'posts#create'
 
   put '/posts/:id', to: 'posts#update'
 
-  delete 'posts/:id', to: 'posts#delete'
+  delete 'posts/:id', to: 'posts#destroy'
 
   post '/comments', to: 'comments#create'
 
-  delete 'comments/:id', to: 'comments#delete'
+  delete 'comments/:id', to: 'comments#destroy'
 
   root 'users#users'
 }
