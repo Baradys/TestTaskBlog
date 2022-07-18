@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
     create_table :posts do |t|
       t.string :title
       t.text :text
-      t.binary :picture
+      t.string :picture
 
     end
   end
