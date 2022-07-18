@@ -6,8 +6,8 @@ class PostsController < ApplicationController
     Post.create(
       title: params[:title],
       text: params[:text],
-      picture:params[:picture],
-      user_id:params[:user_id]
+      picture: params[:picture],
+      user_id: params[:user_id]
     )
   end
 
