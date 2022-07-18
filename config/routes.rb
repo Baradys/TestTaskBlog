@@ -5,5 +5,5 @@ Rails.application.routes.draw {
     resources :comments, only: %i[create destroy]
   end
 
-  root 'users#users'
+  root 'users#index'
 }

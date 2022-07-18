@@ -1,36 +1,37 @@
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_user, only: %i[user_id update destroy]
+  before_action :set_user, only: %i[show create update destroy]
 
-  def users
-    @users_after = User.created_after("2000-20-02")
-    @users_before = User.created_before("2000-20-02")
-    render json: @users_after + @users_before
+  def index
+    @users = User.all
+    render json: @users
   end
 
-  def user_id
-    @user = @user.as_json(:include => { :posts => {
-      :include => { :comments => {
-        :only => [:mark, :text]} },
-      :only => [:title, :text, :picture] } })
+  def show
     render json: @user
   end
 
   def create
-    User.create(
-      name: params[:name],
-    id: params[:id]
-    )
+    @user = User.new user_params
+    @user.save
+    render json: params
   end
 
   def update
     @user.update(
-      name: params[:name]
+      user_params
     )
+    render json: params
   end
 
   def destroy
     @user.destroy
+    render json: User.all
+  end
+
+  private
+  def user_params
+    params.permit(:name)
   end
 
   def set_user
