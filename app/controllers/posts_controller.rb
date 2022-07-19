@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[update destroy]
 
   def create
-    @post = User.new user_params
+    @post = Post.new post_params
     if @post.save
       render json: params
     else

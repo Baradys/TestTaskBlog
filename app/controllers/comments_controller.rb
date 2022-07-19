@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[destroy]
 
   def create
-    @comment = Comment.new user_params
+    @comment = Comment.new comment_params
     if @comment.save
       render json: params
     else
